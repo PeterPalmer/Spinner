@@ -8,7 +8,7 @@ namespace Spinner.Tests
 	public class SpinnerModelTests
 	{
 		[TestMethod]
-		public void Resize()
+		public void SpinnerModel_Resize()
 		{
 			var shapes = new ShapeCollection();
 			shapes.Add(new MovePenTo(20, 30, 0));
@@ -19,7 +19,7 @@ namespace Spinner.Tests
 
 			var movePen = model.Shapes[0][0] as MovePenTo;
 
-			Assert.AreEqual(60, movePen.StartPosition.ProjectedX);
+			Assert.AreEqual(60, movePen.StartPosition.X);
 		}
 	}
 }

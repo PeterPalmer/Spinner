@@ -7,5 +7,6 @@ namespace Spinner.Shapes
 	{
 		public Brush Stroke { get; set; }
 		public Brush Fill { get; set; }
+		public double StrokeWidth { get; set; }
 	}
 }

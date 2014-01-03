@@ -8,28 +8,24 @@ namespace Spinner.Shapes
 		private readonly Coordinate _point1, _point2, _point3;
 		private readonly bool _isStroked;
 
-		public Bezier(BezierSegment segment)
-		{
-			_isStroked = segment.IsStroked;
-			_point1 = new Coordinate(segment.Point1.X, segment.Point1.Y, Constants.InitialZ);
-			_point2 = new Coordinate(segment.Point2.X, segment.Point2.Y, Constants.InitialZ);
-			_point3 = new Coordinate(segment.Point3.X, segment.Point3.Y, Constants.InitialZ);
-		}
+		internal Coordinate Point1 { get { return _point1; } }
+		internal Coordinate Point2 { get { return _point2; } }
+		internal Coordinate Point3 { get { return _point3; } }
 
 		public Bezier(double x1, double y1, double x2, double y2, double x3, double y3, bool isStroked)
 		{
 			_isStroked = isStroked;
-			_point1 = new Coordinate(x1, y1, Constants.InitialZ);
-			_point2 = new Coordinate(x2, y2, Constants.InitialZ);
-			_point3 = new Coordinate(x3, y3, Constants.InitialZ);
+			_point1 = new Coordinate(x1, y1, 0);
+			_point2 = new Coordinate(x2, y2, 0);
+			_point3 = new Coordinate(x3, y3, 0);
 		}
 
 		public Bezier(Point p1, Point p2, Point p3, bool isStroked)
 		{
 			_isStroked = isStroked;
-			_point1 = new Coordinate(p1.X, p1.Y, Constants.InitialZ);
-			_point2 = new Coordinate(p2.X, p2.Y, Constants.InitialZ);
-			_point3 = new Coordinate(p3.X, p3.Y, Constants.InitialZ);
+			_point1 = new Coordinate(p1.X, p1.Y, 0);
+			_point2 = new Coordinate(p2.X, p2.Y, 0);
+			_point3 = new Coordinate(p3.X, p3.Y, 0);
 		}
 
 		public void Draw(StreamGeometryContext ctx)
@@ -51,11 +47,11 @@ namespace Spinner.Shapes
 			_point3.Yaw(angle);
 		}
 
-		public void Move(int x, int y)
+		public void Move(double x, double y, double z)
 		{
-			_point1.Move(x, y);
-			_point2.Move(x, y);
-			_point3.Move(x, y);
+			_point1.Move(x, y, z);
+			_point2.Move(x, y, z);
+			_point3.Move(x, y, z);
 		}
 
 		public void Resize(double scaleFactor)

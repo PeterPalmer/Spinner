@@ -6,13 +6,13 @@ namespace Spinner.Shapes
 {
 	public class PolyBezier : PolyLine
 	{
-		public PolyBezier(PolyBezierSegment segment)
+		public PolyBezier(IEnumerable<Point> points, bool isStroked)
 		{
-			_isStroked = segment.IsStroked;
+			_isStroked = isStroked;
 			_coordinates = new List<Coordinate>();
-			foreach (Point point in segment.Points)
+			foreach (Point point in points)
 			{
-				_coordinates.Add(new Coordinate(point.X, point.Y, Constants.InitialZ));
+				_coordinates.Add(new Coordinate(point.X, point.Y, 0));
 			}
 		}
 

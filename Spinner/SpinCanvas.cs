@@ -32,30 +32,10 @@ namespace Spinner
 		{
 			CompositionTarget.Rendering += Tick;
 			this.MouseMove += MouseMoved;
-		}
-
-		private Point previousPos;
-		void MouseMoved(object sender, MouseEventArgs e)
-		{
-			var position = e.GetPosition(this);
-
-			double deltaX = position.X - previousPos.X;
-			double deltaY = previousPos.Y - position.Y;
-
-			if (Math.Abs(deltaX) < 5 && Math.Abs(deltaY) < 5)
-			{
-				return;
-			}
-
-			deltaX = Math.Min(deltaX, 40D);
-			deltaX = Math.Max(deltaX, -40D);
-			deltaY = Math.Min(deltaY, 40D);
-			deltaY = Math.Max(deltaY, -40D);
-
-			_yawSpeed = 0.003D * deltaX;
-			_pitchSpeed = 0.003D * deltaY;
-
-			previousPos = position;
+			this.DragEnter += OnDragEnter;
+			this.DragOver += OnDragEnter;
+			this.Drop += OnDrop;
+			this.AllowDrop = true;
 		}
 
 		public void LoadSvgFile(string path)
@@ -90,6 +70,54 @@ namespace Spinner
 			_model.Pitch(_pitchSpeed);
 			_model.Yaw(_yawSpeed);
 			_model.Draw(this);
+		}
+
+		private Point previousPos;
+		void MouseMoved(object sender, MouseEventArgs e)
+		{
+			var position = e.GetPosition(this);
+
+			double deltaX = position.X - previousPos.X;
+			double deltaY = previousPos.Y - position.Y;
+
+			if (Math.Abs(deltaX) < 5 && Math.Abs(deltaY) < 5)
+			{
+				return;
+			}
+
+			
+			deltaX = Math.Min(deltaX, Constants.SpeedLimit);
+			deltaX = Math.Max(deltaX, Constants.SpeedLimit * -1);
+			deltaY = Math.Min(deltaY, Constants.SpeedLimit);
+			deltaY = Math.Max(deltaY, Constants.SpeedLimit * -1);
+
+			_yawSpeed = 0.003D * deltaX;
+			_pitchSpeed = 0.003D * deltaY;
+
+			previousPos = position;
+		}
+
+		private void OnDragEnter(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent("FileNameW"))
+			{
+				e.Effects = DragDropEffects.Copy;
+			}
+			else
+			{
+				e.Effects = DragDropEffects.None;
+			}
+
+			e.Handled = true;
+		}
+
+		private void OnDrop(object sender, DragEventArgs e)
+		{
+			var data = e.Data.GetData("FileNameW");
+			if (!(data is String[])) return;
+
+			string Filename = ((String[])data)[0];
+			this.LoadSvgFile(Filename);
 		}
 	}
 }

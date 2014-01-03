@@ -11,7 +11,7 @@ namespace Spinner.Tests
 	public class SvgFileParserTests
 	{
 		[TestMethod]
-		public void ParseFile()
+		public void SvgFileParser_ParseFile()
 		{
 			string svgXml = String.Concat("<svg id='chrome' xmlns='http://www.w3.org/2000/svg' version='1.1'>",
 											"<path fill='#FFFFFF' stroke='none' d='M12.34,56.78' />",

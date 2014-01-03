@@ -54,10 +54,19 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Shapes\CoordinateTests.cs" />
+    <Compile Include="SvgParser\CommandParsers\EllipticalArcCommandParserTests.cs" />
+    <Compile Include="SvgParser\CommandParsers\VerticalLineCommandParserTests .cs" />
+    <Compile Include="SvgParser\CommandParsers\MoveToCommandParserTests.cs" />
+    <Compile Include="SvgParser\CommandParsers\CommandParserTests.cs" />
+    <Compile Include="SvgParser\CommandParsers\CurveRelativeCommandParserTests.cs" />
+    <Compile Include="SvgParser\CommandParsers\SmoothCurveRelativeCommandParserTests.cs" />
+    <Compile Include="SvgParser\CommandParsers\LineCommandParserTests.cs" />
+    <Compile Include="SvgParser\CommandParsers\LineRelativeCommandParserTests.cs" />
+    <Compile Include="SvgParser\CommandParsers\HorizontalLineCommandParserTests.cs" />
     <Compile Include="SvgParser\SvgFileParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpinnerModelTests.cs" />
-    <Compile Include="SvgParser\SvgCommandParserTests.cs" />
+    <Compile Include="SvgParser\SvgPathDataParserTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Spinner\Spinner.csproj">

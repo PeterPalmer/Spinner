@@ -8,15 +8,23 @@ namespace Spinner.Shapes
 		private Coordinate _endPoint;
 		private bool _isStroked;
 
+		public Point EndPoint
+		{
+			get
+			{
+				return new Point(_endPoint.X, _endPoint.Y);
+			}
+		}
+
 		public LineTo(Point endPoint, bool isStroked)
 		{
-			_endPoint = new Coordinate(endPoint.X, endPoint.Y, Constants.InitialZ);
+			_endPoint = new Coordinate(endPoint.X, endPoint.Y, 0);
 			_isStroked = isStroked;
 		}
 
 		public LineTo(double x, double y, bool isStroked)
 		{
-			_endPoint = new Coordinate(x, y, Constants.InitialZ);
+			_endPoint = new Coordinate(x, y, 0);
 			_isStroked = isStroked;
 		}
 
@@ -35,9 +43,9 @@ namespace Spinner.Shapes
 			_endPoint.Yaw(angle);
 		}
 
-		public void Move(int x, int y)
+		public void Move(double x, double y, double z)
 		{
-			_endPoint.Move(x, y);
+			_endPoint.Move(x, y, z);
 		}
 
 		public void Resize(double scaleFactor)

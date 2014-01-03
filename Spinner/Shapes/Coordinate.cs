@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 
 namespace Spinner.Shapes
 {
+	[DebuggerDisplay("{_x} {_y} {_z}")]
 	public class Coordinate
 	{
 		private double _x;
@@ -36,6 +38,22 @@ namespace Spinner.Shapes
 			}
 		}
 
+		internal double X
+		{
+			get
+			{
+				return _x;
+			}
+		}
+
+		internal double Y
+		{
+			get
+			{
+				return _y;
+			}
+		}
+
 		public Coordinate(double x, double y, double z)
 		{
 			_x = x;
@@ -63,10 +81,11 @@ namespace Spinner.Shapes
 			_z = _z * Math.Cos(angle) - oldX * Math.Sin(angle);
 		}
 
-		public void Move(double xDistance, double yDistance)
+		public void Move(double xDistance, double yDistance, double zDistance)
 		{
 			_x += xDistance;
 			_y += yDistance;
+			_z += zDistance;
 		}
 
 		public void Resize(double scaleFactor)

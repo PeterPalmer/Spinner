@@ -34,14 +34,26 @@ namespace Spinner
 					{
 						shape.Draw(ctx);
 					}
+
+					/*ctx.BeginFigure(new System.Windows.Point(100, 100), true, true);
+					ctx.LineTo(new System.Windows.Point(200, 100), true, false);
+					ctx.LineTo(new System.Windows.Point(200, 200), true, false);
+					ctx.LineTo(new System.Windows.Point(100, 200), true, false);
+					ctx.LineTo(new System.Windows.Point(100, 100), true, false);*/
 				}
+
+				//geometry.FillRule = FillRule.Nonzero;
+				geometry.Freeze();
 
 				var path = new Path()
 				{
 					Fill = shapeCollection.Fill,
 					Stroke = shapeCollection.Stroke,
+					StrokeThickness = shapeCollection.StrokeWidth,
 					Data = geometry
 				};
+
+
 				canvas.Children.Add(path);
 			}
 
@@ -57,14 +69,15 @@ namespace Spinner
 			_shapes.ForEach(sc => sc.ForEach(s => s.Yaw(yawSpeed)));
 		}
 
-		public void Move(int x, int y)
+		public void Move(double x, double y, double z)
 		{
-			_shapes.ForEach(sc => sc.ForEach(s => s.Move(x,y)));
+			_shapes.ForEach(sc => sc.ForEach(s => s.Move(x, y, z)));
 		}
 
 		public void Resize(double factor)
 		{
 			_shapes.ForEach(sc => sc.ForEach(s => s.Resize(factor)));
+			_shapes.ForEach(sc => sc.StrokeWidth *= factor);
 		}
 	}
 }

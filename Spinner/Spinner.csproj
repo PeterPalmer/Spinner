@@ -46,8 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\PointExtensions.cs" />
+    <Compile Include="Shapes\Arc.cs" />
     <Compile Include="Shapes\Bezier.cs" />
-    <Compile Include="Shapes\Constants.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Shapes\Coordinate.cs" />
     <Compile Include="Shapes\IShape.cs" />
     <Compile Include="Shapes\LineTo.cs" />
@@ -59,7 +61,27 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SpinnerModel.cs" />
-    <Compile Include="SvgParser\SvgCommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\ClosePathCommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\CommandParameters.cs" />
+    <Compile Include="SvgParser\CommandParsers\CommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\CurveCommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\CurveRelativeCommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\DoubleParameter.cs" />
+    <Compile Include="SvgParser\CommandParsers\EllipticalArcRelativeCommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\EllipticalArcCommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\EllipticalArcParameters.cs" />
+    <Compile Include="SvgParser\CommandParsers\MoveToRelativeCommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\VerticalLineRelativeCommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\VerticalLineCommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\HorizontalLineCommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\HorizontalLineRelativeCommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\LineCommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\LineRelativeCommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\MoveToCommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\PointsParameters.cs" />
+    <Compile Include="SvgParser\CommandParsers\SmoothCurveCommandParser.cs" />
+    <Compile Include="SvgParser\CommandParsers\SmoothCurveRelativeCommandParser.cs" />
+    <Compile Include="SvgParser\SvgPathDataParser.cs" />
     <Compile Include="SvgParser\SvgFileParser.cs" />
     <Compile Include="SvgParser\SvgPath.cs" />
   </ItemGroup>
@@ -87,6 +109,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

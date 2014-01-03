@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
-using System.Windows.Media;
 using Microsoft.Win32;
 
 namespace Spinner.MainApp
@@ -17,7 +16,7 @@ namespace Spinner.MainApp
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			canvas.LoadSvgFile(Path.Combine(Directory.GetCurrentDirectory(), @"SVG-Files\Smile.svg"));
+			canvas.LoadSvgFile(Path.Combine(Directory.GetCurrentDirectory(), @"SVG-files\SvgSpinner.svg"));
 			canvas.Initialize();
 			canvas.Resize(new Size(500,400));
 		}
@@ -55,6 +54,5 @@ namespace Spinner.MainApp
 				canvas.Resize(e.NewSize);
 			}, 500);
 		}
-
 	}
 }

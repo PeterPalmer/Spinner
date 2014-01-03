@@ -21,7 +21,7 @@ namespace Spinner.SvgParser
 				parsedPaths = this.ParsePathsXml(reader);
 			}
 
-			var builder = new SvgCommandParser();
+			var builder = new SvgPathDataParser();
 
 			foreach (var pathData in parsedPaths)
 			{
@@ -38,10 +38,11 @@ namespace Spinner.SvgParser
 
 		private void CenterOverOrigin(SpinnerModel model)
 		{
-			int xOffset = Convert.ToInt32((_maxX - _minX) / 2 + _minX);
-			int yOffset = Convert.ToInt32((_maxY - _minY) / 2 + _minY);
+			double xOffset = (_maxX - _minX) / 2 + _minX;
+			double yOffset = (_maxY - _minY) / 2 + _minY;
+			double zOffset = Math.Max((_maxX - _minX) / 2, (_maxY - _minY) / 2);
 
-			model.Move(xOffset * -1, yOffset * -1);
+			model.Move(xOffset * -1, yOffset * -1, zOffset);
 		}
 
 		public double CalculateScaleFactor(double canvasWidth, double canvasHeight)
@@ -66,8 +67,9 @@ namespace Spinner.SvgParser
 					string data = reader.GetAttribute("d");
 					string fill = reader.GetAttribute("fill");
 					string stroke = reader.GetAttribute("stroke");
+					string strokeWidth = reader.GetAttribute("stroke-width");
 
-					paths.Add(new SvgPath(data, fill, stroke));
+					paths.Add(new SvgPath(data, fill, stroke, strokeWidth));
 				}
 			}
 

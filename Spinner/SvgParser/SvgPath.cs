@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Globalization;
 using System.Text;
 using System.Windows.Media;
+using Spinner.Shapes;
 
 namespace Spinner.SvgParser
 {
@@ -9,6 +11,7 @@ namespace Spinner.SvgParser
 		private readonly string _data;
 		private readonly string _fill;
 		private readonly string _stroke;
+		private readonly string _strokeWidth;
 
 		public string Data
 		{
@@ -24,11 +27,12 @@ namespace Spinner.SvgParser
 			get { return _stroke; }
 		}
 
-		public SvgPath(string data, string fill, string stroke)
+		public SvgPath(string data, string fill, string stroke, string strokeWidth)
 		{
 			_data = data;
 			_fill = fill;
 			_stroke = stroke;
+			_strokeWidth = strokeWidth;
 		}
 
 		public Brush GetFillBrush()
@@ -39,6 +43,16 @@ namespace Spinner.SvgParser
 		public Brush GetStrokeBrush()
 		{
 			return StringToBrush(_stroke);
+		}
+
+		public double GetStrokeWidth()
+		{
+			if(String.IsNullOrWhiteSpace(_strokeWidth))
+			{
+				return 1D;
+			}
+
+			return double.Parse(_strokeWidth, NumberStyles.AllowDecimalPoint, Constants.NumberFormatUS);
 		}
 
 		private Brush StringToBrush(string colorValue)

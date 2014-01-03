@@ -10,20 +10,21 @@ namespace Spinner.Shapes
 		protected List<Coordinate> _coordinates;
 		protected bool _isStroked;
 
-		public PolyLine(PolyLineSegment segment)
-		{
-			_isStroked = segment.IsStroked;
-			_coordinates = new List<Coordinate>();
-			foreach(Point point in segment.Points)
-			{
-				_coordinates.Add(new Coordinate(point.X, point.Y, Constants.InitialZ));
-			}
-		}
-
 		public PolyLine(params Coordinate[] coords)
 		{
 			_coordinates = new List<Coordinate>();
 			_coordinates.AddRange(coords);
+		}
+
+		public PolyLine(IEnumerable<Point> points, bool isStroked)
+		{
+			_isStroked = isStroked;
+
+			_coordinates = new List<Coordinate>();
+			foreach (Point point in points)
+			{
+				_coordinates.Add(new Coordinate(point.X, point.Y, 0));
+			}
 		}
 
 		public virtual void Draw(StreamGeometryContext ctx)
@@ -46,9 +47,9 @@ namespace Spinner.Shapes
 			_coordinates.ForEach(c => c.Yaw(angle));
 		}
 
-		public void Move(int x, int y)
+		public void Move(double x, double y, double z)
 		{
-			_coordinates.ForEach(c => c.Move(x, y));
+			_coordinates.ForEach(c => c.Move(x, y, z));
 		}
 
 		public void Resize(double scaleFactor)
